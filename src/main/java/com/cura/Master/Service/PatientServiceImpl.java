@@ -17,6 +17,12 @@ public class PatientServiceImpl implements PatientService {
         if (patientRepository.existsByUsername(dto.getUsername())) {
             throw new RuntimeException("Username already exists");
         }
+        if (patientRepository.existsByNic(dto.getNic())) {
+            throw new RuntimeException("NIC already exists");
+        }
+        if (patientRepository.existsByPassword(dto.getPassword())) {
+            throw new RuntimeException("Password already exists");
+        }
 
         Patient patient = new Patient();
         patient.setFirstName(dto.getFirstName());

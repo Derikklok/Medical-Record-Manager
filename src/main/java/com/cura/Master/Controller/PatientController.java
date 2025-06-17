@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/patients")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class PatientController {
 
     private final PatientService patientService;
@@ -24,7 +24,7 @@ public class PatientController {
     public ResponseEntity<?> register(@RequestBody RegisterPatientDTO dto) {
         try {
             Patient saved = patientService.register(dto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved.getUsername());
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }

@@ -41,6 +41,7 @@ public class Patient {
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
     @NotBlank(message = "Password is required")
     private String password;
 }
