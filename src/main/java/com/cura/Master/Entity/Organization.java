@@ -24,8 +24,4 @@ public class Organization {
     @Column
     private String ownerUsername;
 
-//    @ElementCollection
-//    @CollectionTable(name = "organization_workers", joinColumns = @JoinColumn(name = "organization_id"))
-//    @Column(name = "worker_username")
-//    private List<String> workers;
 }
