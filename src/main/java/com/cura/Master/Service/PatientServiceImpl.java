@@ -6,6 +6,8 @@ import com.cura.Master.dto.RegisterPatientDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService {
@@ -42,6 +44,11 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByUsername(username)
                 .filter(p -> p.getPassword().equals(password))
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+    }
+
+    @Override
+    public List<Patient> searchByQuery(String query) {
+        return patientRepository.searchByQuery(query);
     }
 
 }

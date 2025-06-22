@@ -9,4 +9,6 @@ public class AccessAccountLoginResponse {
     private String username;
     private String message;
     private boolean success;
+    private String organizationName;
+    private String ownerName;
 }

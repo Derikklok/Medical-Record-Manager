@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/patients")
 @RequiredArgsConstructor
@@ -40,5 +42,11 @@ public class PatientController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new LoginResponse(request.getUsername(), e.getMessage(), false));
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Patient>> searchPatients(@RequestParam String query) {
+        List<Patient> patients = patientService.searchByQuery(query);
+        return ResponseEntity.ok(patients);
     }
 }
