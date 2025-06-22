@@ -34,4 +34,11 @@ public class AccessAccountServiceImpl implements AccessAccountService {
         accessAccountRepository.deleteById(accessId);
     }
 
+    @Override
+    public AccessAccount login(String username, String password) {
+        return accessAccountRepository.findByUsername(username)
+                .filter(a -> a.getPassword().equals(password))
+                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+    }
+
 }

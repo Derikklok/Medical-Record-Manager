@@ -2,6 +2,8 @@ package com.cura.Master.Controller;
 
 import com.cura.Master.Entity.AccessAccount;
 import com.cura.Master.Service.AccessAccountService;
+import com.cura.Master.dto.AccessAccountLoginRequest;
+import com.cura.Master.dto.AccessAccountLoginResponse;
 import com.cura.Master.dto.CreateAccessAccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,4 +36,18 @@ public class AccessAccountController {
         accessAccountService.deleteAccessAccount(accessId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AccessAccountLoginRequest request) {
+        try {
+            AccessAccount account = accessAccountService.login(request.getUsername(), request.getPassword());
+            return ResponseEntity.ok(
+                    new AccessAccountLoginResponse(account.getUsername(), "Login successful", true)
+            );
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AccessAccountLoginResponse(request.getUsername(), e.getMessage(), false));
+        }
+    }
+
 }

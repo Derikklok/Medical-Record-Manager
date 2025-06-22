@@ -9,4 +9,5 @@ public interface AccessAccountService {
     AccessAccount createAccessAccount(CreateAccessAccountDTO dto);
     List<AccessAccount> getAccessAccounts(String organizationName, String ownerUsername);
     void deleteAccessAccount(Long accessId);
+    AccessAccount login(String username, String password);
 }
