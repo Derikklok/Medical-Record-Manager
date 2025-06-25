@@ -33,4 +33,20 @@ public class AppointmentServiceImpl implements AppointmentService{
         return appointmentRepository.findByOrganizationName(organizationName);
     }
 
+    @Override
+    public Appointment getAppointmentById(Long id) {
+        return appointmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
+    }
+
+    @Override
+    public Appointment updateStatus(Long id, String newStatus) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
+
+        appointment.setStatus(newStatus);
+        return appointmentRepository.save(appointment);
+    }
+
+
 }

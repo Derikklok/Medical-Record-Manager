@@ -3,6 +3,7 @@ package com.cura.Master.Controller;
 import com.cura.Master.Entity.Appointment;
 import com.cura.Master.Service.AppointmentService;
 import com.cura.Master.dto.CreateAppointmentDTO;
+import com.cura.Master.dto.UpdateStatusDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +38,26 @@ public class AppointmentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to save appointment");
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAppointmentById(@PathVariable Long id) {
+        try {
+            Appointment appointment = appointmentService.getAppointmentById(id);
+            return ResponseEntity.ok(appointment);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestBody UpdateStatusDTO dto) {
+        try {
+            Appointment updated = appointmentService.updateStatus(id, dto.getStatus());
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
 }
