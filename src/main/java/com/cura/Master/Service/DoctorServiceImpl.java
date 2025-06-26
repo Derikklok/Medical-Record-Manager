@@ -2,9 +2,12 @@ package com.cura.Master.Service;
 
 import com.cura.Master.Entity.Doctor;
 import com.cura.Master.Repository.DoctorRepository;
+import com.cura.Master.dto.DoctorResponseDTO;
 import com.cura.Master.dto.RegisterDoctorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,4 +40,19 @@ public class DoctorServiceImpl implements DoctorService {
                 .filter(d -> d.getPassword().equals(password))
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
+
+    @Override
+    public List<DoctorResponseDTO> getAllDoctorSummaries() {
+        return doctorRepository.findAll().stream().map(doctor ->
+                new DoctorResponseDTO(
+                        doctor.getId(),
+                        doctor.getFirstName(),
+                        doctor.getLastName(),
+                        doctor.getUsername()
+                )
+        ).toList();
+    }
+
+
+
 }
