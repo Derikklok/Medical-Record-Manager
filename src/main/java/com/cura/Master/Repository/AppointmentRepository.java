@@ -8,5 +8,7 @@ import java.util.List;
 public interface AppointmentRepository extends JpaRepository<Appointment , Long> {
     // ✅ Custom finder by organization name
     List<Appointment> findByOrganizationName(String organizationName);
+    List<Appointment> findByPatientName(String patientName);
+    List<Appointment> findByPatientNameContainingIgnoreCase(String patientName);
 
 }

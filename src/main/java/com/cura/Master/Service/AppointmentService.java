@@ -10,5 +10,6 @@ public interface AppointmentService {
     List<Appointment> getAppointmentsByOrganization(String organizationName);
     Appointment getAppointmentById(Long id);
     Appointment updateStatus(Long id, String newStatus);
+    List<Appointment> getAppointmentsByPatientName(String patientName);
 
 }

@@ -48,5 +48,9 @@ public class AppointmentServiceImpl implements AppointmentService{
         return appointmentRepository.save(appointment);
     }
 
+    @Override
+    public List<Appointment> getAppointmentsByPatientName(String patientName) {
+        return appointmentRepository.findByPatientNameContainingIgnoreCase(patientName);
+    }
 
 }

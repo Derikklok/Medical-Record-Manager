@@ -59,5 +59,11 @@ public class AppointmentController {
         }
     }
 
+    @GetMapping("/by-patient")
+    public ResponseEntity<?> getByPatientName(@RequestParam String patientName) {
+        List<Appointment> appointments = appointmentService.getAppointmentsByPatientName(patientName);
+        return ResponseEntity.ok(appointments);
+    }
+
 
 }
